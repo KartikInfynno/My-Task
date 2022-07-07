@@ -32,3 +32,15 @@ def find_age(born):
         ((today.month, today.day) < (born.month, born.day))
 
     return age
+
+
+def filter_age(e):
+    return e["Age"]
+
+
+def filter_name(e):
+    return e["Name"]
+
+
+def filter_dob(e):
+    return e["Age"]

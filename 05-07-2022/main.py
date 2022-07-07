@@ -1,4 +1,7 @@
+from audioop import reverse
 import json
+
+from sympy import true
 import module
 
 f = open('data.json')
@@ -30,86 +33,179 @@ def pageing(c):
     return
 
 
-for i in data["data"][:5]:
-    for k, v in i.items():
-        if k:
-            if k == "DOB":
-                print(k, " : ", module.date_format(v))
-            else:
-                print(k, " : ", v)
-    print()
+def page(c):
+
+    for i in data["data"][:5]:
+        for k, v in i.items():
+            if k:
+                if k == "DOB":
+                    print(k, " : ", module.date_format(v))
+                else:
+                    print(k, " : ", v)
+        print()
+
+    while True:
+        inp = input(string)
+        print()
+        if inp == "n" or inp == "N":
+            c += 5
+            pageing(c)
+            if c == 25:
+                print("End of the Page")
+        elif inp == "p" or inp == "P":
+            c -= 5
+            pageing(c)
+            if c < 0:
+                print("No Page Left")
+        elif inp == "1":
+            for i in data["data"][:5]:
+                for k, v in i.items():
+                    if k:
+                        if k == "DOB":
+                            print(k, " : ", module.date_format(v))
+                        else:
+                            print(k, " : ", v)
+                print()
+        elif inp == "2":
+            for i in data["data"][5:10]:
+                for k, v in i.items():
+                    if k:
+                        if k == "DOB":
+                            print(k, " : ", module.date_format(v))
+                        else:
+                            print(k, " : ", v)
+                print()
+            c = 10
+        elif inp == "3":
+            for i in data["data"][10:15]:
+                for k, v in i.items():
+                    if k:
+                        if k == "DOB":
+                            print(k, " : ", module.date_format(v))
+                        else:
+                            print(k, " : ", v)
+                print()
+            c = 15
+        elif inp == "4":
+            for i in data["data"][15:20]:
+                for k, v in i.items():
+                    if k:
+                        if k == "DOB":
+                            print(k, " : ", module.date_format(v))
+                        else:
+                            print(k, " : ", v)
+                print()
+            c = 20
+        elif inp == "5":
+            for i in data["data"][20:25]:
+                for k, v in i.items():
+                    if k:
+                        if k == "DOB":
+                            print(k, " : ", module.date_format(v))
+                        else:
+                            print(k, " : ", v)
+                print()
+            c = 25
+
+        elif inp == "0":
+            break
+
+        else:
+            print("Invalid Input")
+
+
+def sort_Name_a():
+    s_name = data["data"].copy()
+    s_name.sort(key=module.filter_name)
+    for i in s_name:
+        for k, v in i.items():
+            if k:
+                if k == "DOB":
+                    print(k, " : ", module.date_format(v))
+                else:
+                    print(k, " : ", v)
+        print()
+# def sort_Name_d():
+#     s_name = data["data"].copy()
+#     s_name.sort(key=module.filter_name, reverse=True)
+#     for i in s_name:
+#         for k, v in i.items():
+#             if k:
+#                 if k == "DOB":
+#                     print(k, " : ", module.date_format(v))
+#                 else:
+#                     print(k, " : ", v)
+#         print()
+
+
+def sort_Age_a():
+    s_Age = data["data"].copy()
+    s_Age.sort(key=module.filter_age)
+    for i in s_Age:
+        for k, v in i.items():
+            if k:
+                if k == "DOB":
+                    print(k, " : ", module.date_format(v))
+                else:
+                    print(k, " : ", v)
+        print()
+# def sort_Age_d():
+#     s_name = data["data"].copy()
+#     s_name.sort(key=module.filter_age, reverse=True)
+#     for i in s_name:
+#         for k, v in i.items():
+#             if k:
+#                 if k == "DOB":
+#                     print(k, " : ", module.date_format(v))
+#                 else:
+#                     print(k, " : ", v)
+#         print()
+
+
+def sort_DOB_a():
+    s_DOB = data["data"].copy()
+    s_DOB.sort(key=module.filter_dob, reverse=True)
+    for i in s_DOB:
+        for k, v in i.items():
+            if k:
+                if k == "DOB":
+                    print(k, " : ", module.date_format(v))
+                else:
+                    print(k, " : ", v)
+        print()
+# def sort_DOB_d():
+#     s_name = data["data"].copy()
+#     s_name.sort(key=module.filter_dob, reverse=True)
+#     for i in s_name:
+#         for k, v in i.items():
+#             if k:
+#                 if k == "DOB":
+#                     print(k, " : ", module.date_format(v))
+#                 else:
+#                     print(k, " : ", v)
+#         print()
+
 
 while True:
+    print("Press 1 for Paging")
+    print("Press 2 for Sorting by name")
+    print("Press 3 for Sorting by age")
+    print("Press 4 for Sorting by DOB")
+    print("Press 0 For Exit")
 
-    inp = input(string)
-    print()
-    if inp == "n" or inp == "N":
-        c += 5
-        pageing(c)
-        if c == 25:
-            print("End of the Page")
+    inpu = input()
 
-    elif inp == "p" or inp == "P":
-        c -= 5
-        pageing(c)
-        if c < 0:
-            print("No Page Left")
+    if inpu == "1":
+        page(c)
 
-    elif inp == "1":
-        for i in data["data"][:5]:
-            for k, v in i.items():
-                if k:
-                    if k == "DOB":
-                        print(k, " : ", module.date_format(v))
-                    else:
-                        print(k, " : ", v)
-            print()
-        # c = c + 5
+    elif inpu == "2":
+        sort_Name_a()
 
-    elif inp == "2":
-        for i in data["data"][5:10]:
-            for k, v in i.items():
-                if k:
-                    if k == "DOB":
-                        print(k, " : ", module.date_format(v))
-                    else:
-                        print(k, " : ", v)
-            print()
-        c = c + 5
+    elif inpu == "3":
+        sort_Age_a()
 
-    elif inp == "3":
-        for i in data["data"][10:15]:
-            for k, v in i.items():
-                if k:
-                    if k == "DOB":
-                        print(k, " : ", module.date_format(v))
-                    else:
-                        print(k, " : ", v)
-            print()
-        c = c + 5
+    elif inpu == "4":
+        sort_DOB_a()
 
-    elif inp == "4":
-        for i in data["data"][15:20]:
-            for k, v in i.items():
-                if k:
-                    if k == "DOB":
-                        print(k, " : ", module.date_format(v))
-                    else:
-                        print(k, " : ", v)
-            print()
-        # c = 20
-        c = c + 5
-
-    elif inp == "5":
-        for i in data["data"][20:25]:
-            for k, v in i.items():
-                if k:
-                    if k == "DOB":
-                        print(k, " : ", module.date_format(v))
-                    else:
-                        print(k, " : ", v)
-            print()
-        c = c + 5
-
-    else:
-        print("Invalid Input")
+    elif inpu == "0":
+        break
